@@ -1,11 +1,12 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from home.views import IndexView, PruebaListView, ModeloPruebaListView
 urlpatterns = [
-    path('home/', IndexView.as_view()),
-    path('lista/', PruebaListView.as_view()),
-    path('lista-prueba/', ModeloPruebaListView.as_view()),
+    #ruta principal admin
     path('admin/', admin.site.urls),
+    
+    #incluir rutas empleados
+    path('', include('empleados.urls')),
 ]

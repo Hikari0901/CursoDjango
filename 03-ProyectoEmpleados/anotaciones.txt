@@ -1,0 +1,16 @@
+creamos el modelo Departamento asiganando una class
+luego importamos el modelo en admin
+luego agregamos la app al settings 
+luego migramos 
+verificamos en la pagina
+
+
+
+blank = True: hace que el campo no sea obligatorio
+unique = True: hace que no se pueda repetir el nombre en la app dep 
+editable = False: hace que desaparezca todo el campo para que el admin nomas pueda editar
+choice = (la variable en tupla) sirve para darte una lista que pongas y que escoja el usuario
+
+
+unión en django Forenkey
+
