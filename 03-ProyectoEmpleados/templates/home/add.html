@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% include 'base.html' %}
 
 
 {% block title %}
@@ -8,8 +8,7 @@
 
 
 {% block content %}
-
-{% include 'includes/header.html' %}
+    
 <div class="grid-container">
   <div class="grid-x">
     <h1 class="cell">Registrar empelado</h1>
@@ -17,32 +16,32 @@
 
       <div class="medium-6 cell">
         <label>Nombres:
-          {{form.first_name}}
+          
         </label>
       </div>
       <div class="medium-6 cell">
         <label>Apellidos:
-            {{form.last_name}}
+          
         </label>
       </div>
       <div class="medium-6 cell">
         <label>Trabajo:
-            {{form.job}}
+          
         </label>
       </div>
       <div class="medium-6 cell">
         <label>Departamento:
-            {{form.departamento}}
+          
         </label>
       </div>
       <div class="medium-12 cell">
         <label>Habilidades:
-            {{form.Habilidades}}
+          
         </label>
       </div>
       <div class="medium-12 cell">
         <label>foto:
-            {{form.image}}
+          
         </label>
       </div>
       <div class="medium-12 cell">
@@ -51,21 +50,18 @@
 
     </form>
   </div>
+
+
 {% endblock content %}
+    
 
 
 
 
 
+<h2>Probando Create View</h2>
 
-
-
-
-
-
-<h1>Registrar Empleado</h1>
-
-<form method="POST">{% csrf_token %} <!--EL POST REGISTRA LOS DATOS EN LA BASE DE DATOS-->
+<form method="POST">{% csrf_token %}
     {{ form }}
     <button type="submit">Agregar</button>
 </form>

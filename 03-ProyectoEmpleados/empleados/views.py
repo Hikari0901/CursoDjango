@@ -14,19 +14,37 @@ from django.views.generic import (
 #importar el modelo empleados
 from .models import Empleado
 
+#importar el forms
+from .forms import EmpleadoForm
+
+
 # Create your views here.
+class InicioView(TemplateView):
+    """Vista pagina de inicio"""
+    template_name='inicio.html'
+    
+
 #1.listar todos los empleados de la empresa
 class ListaAllEmpleados(ListView):
     template_name= 'empleados/list_all.html'
     #ordena por el nombre
     ordering = 'first_name'
     #selecciona la cant de elementos y los distribuye en pags
-    paginate_by= 4
+    paginate_by= 6
     model = Empleado
+    
+    def get_queryset(self):
+        palabra_clave= self.request.GET.get("kword",'')
+        lista= Empleado.objects.filter(
+            #icontanes sirve para ver la relacion de la palabra clave
+            first_name__icontains=palabra_clave
+        )
+        return lista
     
 #2.listar todos los empleados que pertenecen a una area de la empresa
 class ListByAreaEmpleado(ListView):
     template_name= 'empleados/list_by_area.html'
+    context_object_name='empleados'
     
     def get_queryset(self):
         #el codigo que se necesita, llamamos a la parte de la BD
@@ -90,9 +108,10 @@ class EmpleadoCreateView(CreateView):
     template_name = 'empleados/add.html'
     model = Empleado
     #se llama a todos los campos
-    fields = ['first_name', 'last_name', 'job', 'departamento', 'Habilidades']#'__all__'
+    form_class= EmpleadoForm
+    ##fields = ['first_name', 'last_name', 'job', 'departamento', 'Habilidades']#'__all__'
     #llamas a la url por el nombre que le has puesto
-    success_url = reverse_lazy('empleado_app:correcto')
+    success_url = reverse_lazy('empleado_app:empleados_admin')
     
     def form_valid(self, form):
         #valida la informacion
